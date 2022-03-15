@@ -1,0 +1,938 @@
+@use "sass:math";
+
+// Подключение миксинов ===========================================================================================================================================================================================================================================================================
+// @import "base/mixins";
+
+// Подключение шрифтов ===========================================================================================================================================================================================================================================================================
+//&display=swap - добавить при подключении через плагин Google Fonts
+
+// Подключение локальных шрифтов =====================================================
+@import "fonts";
+
+// Подключение normalize.scss =====================================================
+@import 'normalize';
+
+// Переменные ===============================================================================================================================================================================================================================================================================================
+// Минимальная ширина страницы
+$minWidth: 320;
+// Ширина полотна (макета)
+$maxWidth: 1920;
+// Ширина ограничивающего контейнера (0 = нет ограничения)
+$maxWidthContainer: 1050;
+// Общий отступ у контейнера
+// (30 = по 15px слева и справа, 0 = нет отступа)
+$containerPadding: 30;
+// Ширина срабатывания первого брейкпоинта
+$containerWidth: $maxWidthContainer + $containerPadding;
+
+// Брейк-поинты =====================================================
+// $pc: em($containerWidth); // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
+// $tablet: em(991.98); // Планшеты, некоторые телефоны в горизонтальном положении
+// $mobile: em(767.98); // Телефоны L
+// $mobileSmall: em(479.98); // Телефоны S
+
+// Общие настройки =====================================================
+    /* Шрифт по умолчанию */
+	$font-family: Montserrat;
+	$fontSize: 14px; 
+    /* Основные цвета */
+    $white:#ffffff;
+	$light-white: #F3F3F3;
+    $second-text-color:#737373;
+    $text-color:#252B42;
+    $secondary-color-1:#0D5C63;
+    $primary-color:#FF7B47;
+	$disabled-element-color:#8EC2F2;
+	$secondary-color-2:#17213C;
+
+html,
+body {
+	box-sizing: border-box;
+	background-color: $white;
+	color: $text-color;
+	font-size: $fontSize;
+	font-family: $font-family;
+	height: 100%; //для прижатия подвала к низу
+}
+// body {
+// 	font-family: Montserrat;
+// 	font-size: 100%;
+// 	line-height: 1;
+// 	font-size: 1rem;
+// }
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+img {
+    max-width: 100%;
+}
+// Технические классы =====================================================
+// Ограничивающий контейнер
+._container {
+	// ширина контейнера 1050px
+	max-width: 1080px;
+	padding: 0 15px;
+	margin: 0 auto;
+}
+// Адаптивная фоновая картинка
+._ibg {
+	position: relative;
+}
+._ibg img {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	object-fit: cover;
+}
+// Обнулятор для списков =====================================================
+.list-reset {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+// Обнулятор для кнопок =====================================================
+.btn-reset {
+	padding: 0;
+	border: none;
+	font-family: $font-family;
+	background-color: transparent;
+	cursor: pointer;
+}
+// Прижатие "подвала" к низу =====================================================
+.wrapper {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	// Прижимаем footer
+	> main {
+		flex: 1 1 auto;
+	}
+}
+
+// ОСНОВНОЕ СОДЕРЖИМОЕ =====================================================
+.page {
+	&__image {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+	}
+	&__main-block {
+	}
+}
+.main-block {
+	position: relative;
+	background-color: #FAFAFA;
+	
+	&__container {		
+	}
+
+	&__body {
+		padding: 184px 0px 191px 0px;
+		position: relative;
+		z-index: 2;
+		max-width: 400px;
+	}
+	
+	&__body > *:not(:last-child) {
+		margin: 0px 0px 35px 0px;
+	}
+	&__title {
+		font-style: normal;
+		font-weight: 800;
+		font-size: 58px;
+		line-height: 138%;
+		letter-spacing: 0.2px;
+		color: $text-color;
+	}
+
+	&__text {
+		font-family: 'Montserrat';
+		font-style: normal;
+		font-weight: 500;
+		font-size: 20px;
+		line-height: 150%;
+		letter-spacing: 0.2px;
+		color: $second-text-color;
+	}
+
+	&__buttons {
+		display: flex;
+		flex-wrap: wrap;
+		margin: -10px 0;
+		gap: 10px;
+	}
+
+	&__button {
+		border-radius: 37px;
+		display: flex;
+		min-height: 48px;
+		justify-content: center;
+		align-items: center;
+		letter-spacing: 0.2px;
+		font-weight: 700;
+		text-align: center;
+		padding: 5px 36px;
+		margin: 10px 0;
+		transition: all 0.3s ease 0s;
+
+		font-size: 14px;
+		line-height: 200%;
+		text-decoration: none;
+		margin: 10px 0;	
+
+		&_orange {
+			background-color: $primary-color;
+			color: $white;
+		}
+		&_orange:hover {
+			border: 1px solid none;
+			background-color: $secondary-color-1;
+		}
+		&_border {
+			border: 1px solid $secondary-color-1;
+			color: $secondary-color-1;
+		}
+		&_border:hover {
+			background-color: $secondary-color-1;
+			color: $white;
+		}
+	}
+}
+
+// КАРТОЧКИ С УСЛУГАМИ =====================================================
+.page {
+	background-color: #FAFAFA;
+	
+	&__services {
+		position: relative;
+		z-index: 2;
+		margin: -111px 0px 0px 0px;
+	}
+}
+.services {
+
+	&__container {
+	}
+
+	&__body {
+		display: flex;
+		margin: 0 -15px;
+	}
+
+	&__column {
+		flex: 0 1 33%;
+		padding: 0 15px;
+	}
+
+	&__item {
+		height: 100%;
+		box-shadow: 0px 13px 19px rgba(0, 0, 0, 0.07);
+		background-color: #fff;
+		padding: 35px;
+	}
+}
+.item-service {
+	& > *:not(:last-child) {
+		margin: 0px 0px 10px 0px;
+	}
+	&_green {
+		background-color: $secondary-color-1;
+	}
+	
+	&__icon {
+	}
+
+	&__title {
+		font-style: normal;
+		font-weight: 700;
+		font-size: 24px;
+		line-height: 133%;
+		letter-spacing: 0.1px;
+		color: $text-color;
+
+		&_white {
+			color: $white;
+		}
+	}
+	&__subtitle {
+		font-style: normal;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 143%;
+		letter-spacing: 0.2px;
+		color: $second-text-color;
+
+		&_white {
+			color: $white;
+		}
+	}
+}
+
+// Designing Better Experience =====================================================
+.page {
+
+	&__advantages {
+		padding: 80px 0;
+		background-color: #FAFAFA;
+	}
+}
+.advantages {
+
+	&__container {
+	}
+
+	&__header {
+		margin: 0px 0px 50px 0px;
+	}
+	&__body {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		margin: 0 -15px;
+	}
+	&__column {
+		padding: 0 15px;
+		flex: 0 1 25%;		
+	}
+	&__item {
+		background-color: #fff;
+		padding: 30px;
+		font-weight: 700;
+		text-align: center;
+	}
+
+	&__icon {
+	}
+
+	&__title {
+		font-style: normal;
+		font-weight: 700;
+		font-size: 40px;
+		line-height: 142%;
+		letter-spacing: 0.2px;
+		color: $text-color;
+	}
+
+	&__sub-title {
+		font-style: normal;
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 150%;
+		letter-spacing: 0.1px;
+		color: $second-text-color;
+	}
+}
+.header-block {
+	text-align: center;
+
+	&__title {
+		font-style: normal;
+		font-weight: 700;
+		font-size: 40px;
+		line-height: 142%;
+		letter-spacing: 0.2px;
+		color: $text-color;
+		margin: 0 0 10px 0;
+	}
+
+	&__sub-title {
+		font-style: normal;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 143%;
+		letter-spacing: 0.2px;
+		color: $second-text-color;
+	}
+}
+
+// Practice Advice =====================================================
+.page {
+
+	&__advice {
+		background-color: #FAFAFA;
+	}
+}
+.advice {
+	padding: 80px 0 80px 0;
+
+	&__container {
+	}
+
+	&__header {
+		margin: 45px 0 45px 0;
+	}
+
+	&__body {
+		display: flex;
+		flex-wrap: wrap;
+		margin: 0 -15px;
+	}
+
+	&__column {
+		flex: 0 1 25%;
+		padding: 0 15px;
+	}
+
+	&__item {
+		background-color: $white;
+		display: flex;
+		height: 100%;
+		flex-direction: column;
+	}
+
+	&__content {
+		flex: 1 1 auto;
+		padding: 30px;
+	}
+
+	&__title {
+		font-style: normal;
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 150%;
+		letter-spacing: 0.1px;
+		color: $text-color;
+	}
+
+	&__sub-title {
+		font-style: normal;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 143%;
+		letter-spacing: 0.2px;
+		color: $second-text-color;
+		
+	}
+
+	&__image {
+		display: block;
+		padding: 0px 0px 60% 0px;
+// 60% 
+// высота картинки 138px / ширина картинки 230 = 0.6
+	}
+}
+.advice-header-block {
+	text-align: center;
+
+	&__title {
+		font-style: normal;
+		font-weight: 700;
+		font-size: 40px;
+		line-height: 142%;
+		letter-spacing: 0.2px;
+		color: $text-color;
+
+		margin: 0 0 10px 0;
+	}
+
+	&__sub-title {
+		font-style: normal;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 143%;
+		letter-spacing: 0.2px;
+		color: $second-text-color;
+	}
+}
+
+// Who We Are =====================================================
+.page {
+
+	&__about-us {
+		background: #ffffff;
+		padding: 100px 0px 100px 0px;
+	}
+}
+.abouts-us {
+
+	&__header {
+	}
+
+	&__body {
+		display: flex;
+	}
+}
+.abouts-us-header-block {
+	margin: 0 0 100px 0;
+	text-align: center;
+	
+	&__title {
+		font-style: normal;
+		font-weight: 700;
+		font-size: 40px;
+		line-height: 142%;
+		letter-spacing: 0.2px;
+		color: $text-color;
+	}
+
+	&__sub-title {
+		font-style: normal;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 143%;
+		letter-spacing: 0.2px;
+		color: $second-text-color;
+	}
+}
+.whoweare {
+
+	&__video {
+		flex: 0 0 57%; 
+// 57% = ширина видео 600 / ширина контейнтной части 1046
+		position: relative;
+		padding: 0px 0px 42.25% 0px;
+// 42% = высота видео 442 / ширина контейнтной части 1046
+		iframe {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			object-fit: cover;
+		}
+	}
+}
+.abous-us {
+
+	&__content {
+		padding: 0 0 0 120px;
+		flex: 1 1 auto;
+	}
+
+	&__content > *:not(:last-child) {
+		margin: 0px 0px 30px 0px;
+	}
+
+	&__title {
+		font-style: normal;
+		font-weight: 700;
+		font-size: 40px;
+		line-height: 142%;
+		letter-spacing: 0.2px;
+		color: $text-color;
+
+		&:not(:last-child) {
+			margin: 0px 0px 10px 0px;
+		}
+	}
+	
+	&__sub-title {
+		font-style: normal;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 143%;
+		letter-spacing: 0.2px;
+		color: $second-text-color;
+	}
+}
+.about-us {
+
+	&__top {
+		padding: 20px 0 20px 0;
+	}
+
+	&__item {
+	}
+}
+.item-about-us {
+	display: flex;
+	align-items: flex-start;
+
+	&:not(:last-child) {
+		margin: 0px 0px 30px 0px;
+	}
+
+	&__icon {
+		margin: 0 21px 0 0;
+	}
+
+	&__icon img {
+		max-width: none;
+	}
+	
+	&__body {
+		display: flex;
+		align-items: flex-start;
+	}
+
+	&__title {
+		font-style: normal;
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 150%;
+		letter-spacing: 0.1px;
+		color: $text-color;
+
+		&:not(:last-child) {
+			margin: 0px 0px 5px 0px;
+		}
+	}
+
+	&__subtitle {
+		font-style: normal;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 143%;
+		letter-spacing: 0.2px;
+		color: $second-text-color;
+
+// для ... в конце предложения
+		white-space: nowrap;
+		width: 225px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}
+
+// Clients =====================================================
+.page {
+
+	&_clients {
+	}
+}
+.clients {
+	padding: 50px 0 50px 0;
+	background-color: #FAFAFA;
+
+	&__container {
+	}
+
+	&__body {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	&__item {
+		flex: 0 1 16.6667%;
+		text-align: center;
+		min-width: 140px;
+		padding: 8px 15px;
+		&:first-child {
+			padding-left: 0;
+		}
+		&:last-child {
+			padding-right: 0;
+		}
+	}
+}
+
+// Subscribe =====================================================
+.page {
+
+	&_subscribe {
+	}
+}
+.subscribe {
+	padding: 20px 0 20px 0;
+	position: relative;
+		&:before {
+			content: "";
+			width: 100%;
+			background-color: $text-color;
+			height: 77px;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+		}
+	&__container {
+	}
+
+	&__body {
+		position: relative;
+		z-index: 2;
+		background-color: $secondary-color-2;
+		max-width: 986px;
+		padding: 30px 40px 30px 50px;
+		margin: 0 auto;
+		display: flex;
+    	justify-content: space-between;
+	}
+
+	&__header {
+		max-width: 266px;
+	}
+
+	&__form {
+		flex: 0 1 50%;
+		display: flex;
+		align-items: center;
+	}
+
+	&__input {
+		width: 100%;
+		flex: 1 1 auto;
+		min-height: 58px;
+		background: #f9f9f9;
+		padding: 0px 20px;
+		border: 1px solid #e6e6e6;
+		border-right: 0;
+		border-radius: 5px 0 0 5px;
+
+		// текст
+		font-style: normal;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 200%;
+		letter-spacing: 0.2px;
+		color: $second-text-color;
+
+		&:focus {
+			color: #000;
+			outline: none;
+		}
+	}
+
+	&__button {
+		background-color: $primary-color;
+		border: 1px solid #e6e6e6;
+		border-radius: 0px 5px 5px 0px;
+		display: flex;
+		min-height: 58px;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		transition: all 0.3s ease 0s;
+		padding: 0px 22px;
+		
+		// текст
+		font-style: normal;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 200%;
+		text-align: center;
+		letter-spacing: 0.2px;
+		color: $white;
+
+		&:hover {
+			background: $secondary-color-2;
+		}
+	}
+}
+.subcribe {
+
+	&__title {
+		font-style: normal;
+		font-weight: 700;
+		font-size: 24px;
+		line-height: 133%;
+		letter-spacing: 0.1px;
+		color: $white;
+		margin: 0;
+	}
+}
+
+// Get In Touch =====================================================
+.page {
+	
+	&__getintouch {
+	}
+}
+.getintouch {
+	padding: 80px 0 148px 0;
+	background-color: #F3F3F3;
+
+	&__container {
+	}
+
+	&__header {
+		margin: 0 0 80px 0;
+	}
+
+	&__body {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+		padding: 0 32px 0 32px;
+	}
+
+	&__item {
+	}
+
+	&__item > *:not(:last-child) {
+		margin: 0 0 15px 0;
+	}
+}
+.header-getintouch {
+
+	&__title {
+		font-style: normal;
+		font-weight: 700;
+		font-size: 40px;
+		line-height: 142%;
+		letter-spacing: 0.2px;
+		color: $text-color;
+		text-align: center;
+
+		&:not(:last-child) {
+			margin: 0px 0px 10px 0px;
+		}
+	}
+
+	&__sub-title {
+		font-style: normal;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 143%;
+		letter-spacing: 0.2px;
+		color: $second-text-color;
+		text-align: center;
+	}
+}
+.item-getintouch {
+	flex: 0 1 33.333%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 50px 40px 50px 40px;
+	background-color: $white;
+	text-align: center;
+
+	&_active {
+		background-color: $text-color;
+		color: $white;
+		padding: 80px 40px 80px 40px;
+		& .item-getintouch__submit {
+			color: inherit;
+			border-color: inherit;
+			&:hover {
+				border-color: $primary-color;
+				background-color: $primary-color;
+			}	
+		}
+	}
+
+	&__icon {
+	}
+
+	&__emails {		
+	}
+
+	&__email {
+		font-style: normal;
+		font-weight: 600;
+		font-size: 14px;
+		line-height: 171%;
+		letter-spacing: 0.2px;
+		color: inherit;
+		text-decoration: none;
+	}
+
+	&__title {
+		font-style: normal;
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 150%;
+		letter-spacing: 0.1px;
+		color: inherit;
+	}
+
+	&__submit {
+		font-style: normal;
+		font-weight: 600;
+		font-size: 14px;
+		line-height: 171%;
+		letter-spacing: 0.2px;
+		color: $primary-color;
+		text-decoration: none;
+		padding: 10px 20px 10px 20px;
+		min-height: 44px;
+		transition: all 0.3s ease 0s;
+		border-radius: 5px;
+		border: 1px solid $primary-color;
+
+		&:hover {
+			background-color: $primary-color;
+			color: $white;
+		}
+	}
+}
+
+// Contact Us =====================================================
+.page {
+
+	&_subscribe {
+	}
+}
+.contact-us {
+	background-color: #FAFAFA;
+	padding: 40px 0 40px 0;
+
+	&__container {
+	}
+
+	&__body {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&__header {
+	}
+
+	&__title {
+		font-style: normal;
+		font-weight: 700;
+		font-size: 24px;
+		line-height: 133%;
+		letter-spacing: 0.1px;
+		color: $text-color;
+		margin: 0 0 10px 0;
+	}
+
+	&__sub-title {
+		font-style: normal;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 143%;
+		letter-spacing: 0.2px;
+		color: $second-text-color;
+	}
+	&__button {
+		display: flex;
+		background-color: #ff7b47;
+		border-radius: 5px;
+		min-height: 58px;
+		padding: 5px 40px;
+		transition: background-color 0.3s ease 0s;
+		justify-content: center;
+		align-items: center;
+		text-decoration: none;
+
+		font-style: normal;
+		font-weight: 700;
+		font-size: 14px;
+		line-height: 200%;
+		text-align: center;
+		letter-spacing: 0.2px;
+		color: $white;
+
+		&:hover {
+			background-color: $secondary-color-2;
+		}
+	}
+}
+
+
+
+// Подключение стилей отдельных блоков =====================================================
+@import "header";
+@import "footer";
+
+// Подключение стилей отдельных страниц =====================================================
+// @import "home";
+
+// Подключение медиа-запросов =====================================================
+@import 'media-requests';
+

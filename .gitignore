@@ -1,12 +1,11 @@
 # игнорирует файл node_modules
 node_modules
+package-lock.json
 # # игнорирует все файлы в проекте
 # .vscode/*
-# # не игнорировать settings.json, tasks.json, launch.json, extensions.json
-# # ищет файлы начиная от корня документа
+# не игнорировать settings.json, tasks.json, launch.json, extensions.json
+# ищет файлы начиная от корня документа
 # !.vscode/settings.json
 # !.vscode/tasks.json
 # !.vscode/launch.json
 # !.vscode/extensions.json
-# # хуй знает что это
-# assets/*.hot-update.*

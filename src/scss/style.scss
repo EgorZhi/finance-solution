@@ -26,10 +26,10 @@ $containerPadding: 30;
 $containerWidth: $maxWidthContainer + $containerPadding;
 
 // Брейк-поинты =====================================================
-// $pc: em($containerWidth); // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
-// $tablet: em(991.98); // Планшеты, некоторые телефоны в горизонтальном положении
-// $mobile: em(767.98); // Телефоны L
-// $mobileSmall: em(479.98); // Телефоны S
+$pc: $containerWidth + px; // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
+$tablet: 991.98px; // Планшеты, некоторые телефоны в горизонтальном положении
+$mobile: 767.98px; // Телефоны L
+$mobileSmall: 479.98px; // Телефоны S
 
 // Общие настройки =====================================================
     /* Шрифт по умолчанию */
@@ -54,12 +54,9 @@ body {
 	font-family: $font-family;
 	height: 100%; //для прижатия подвала к низу
 }
-// body {
-// 	font-family: Montserrat;
-// 	font-size: 100%;
-// 	line-height: 1;
-// 	font-size: 1rem;
-// }
+body._lock {
+    overflow: hidden;
+}
 *,
 *::before,
 *::after {
@@ -306,6 +303,8 @@ img {
 		padding: 30px;
 		font-weight: 700;
 		text-align: center;
+		min-width: 200px;
+
 	}
 
 	&__icon {
@@ -559,6 +558,7 @@ img {
 	
 	&__body {
 		display: flex;
+		flex-direction: column;
 		align-items: flex-start;
 	}
 
@@ -749,7 +749,6 @@ img {
 
 	&__body {
 		display: flex;
-		flex-wrap: wrap;
 		justify-content: center;
 		align-items: center;
 		padding: 0 32px 0 32px;

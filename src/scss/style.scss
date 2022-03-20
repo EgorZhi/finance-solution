@@ -54,6 +54,7 @@ body {
 	font-family: $font-family;
 	height: 100%; //для прижатия подвала к низу
 }
+// Запрещаем прокрутку при активном меню "Бургер"
 body._lock {
     overflow: hidden;
 }
@@ -299,12 +300,12 @@ img {
 		flex: 0 1 25%;		
 	}
 	&__item {
-		background-color: #fff;
+		height: 100%;
+		background-color: $white;
 		padding: 30px;
 		font-weight: 700;
 		text-align: center;
 		min-width: 200px;
-
 	}
 
 	&__icon {
@@ -456,6 +457,7 @@ img {
 
 	&__body {
 		display: flex;
+		align-items: flex-start;
 	}
 }
 .abouts-us-header-block {
@@ -481,7 +483,6 @@ img {
 	}
 }
 .whoweare {
-
 	&__video {
 		flex: 0 0 57%; 
 // 57% = ширина видео 600 / ширина контейнтной части 1046

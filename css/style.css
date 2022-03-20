@@ -1459,6 +1459,12 @@ img {
     flex-wrap: wrap;
   }
 
+  .abous-us__content {
+    padding: 0;
+  }
+  .abous-us__content > *:not(:last-child) {
+    margin: 0 0 30px 0;
+  }
   .abous-us__title:not(:last-child) {
     margin: 30px 0px 20px 0px;
   }

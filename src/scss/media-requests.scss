@@ -193,6 +193,12 @@
 	}
 }
 .abous-us {
+	&__content {
+		padding: 0;
+	}	
+	&__content > *:not(:last-child) {
+		margin: 0 0 30px 0;
+	}
 	&__title {
 		&:not(:last-child) {
 			margin: 30px 0px 20px 0px;
